@@ -202,7 +202,7 @@ def hash_get(update, context):
 @run_async
 @spamcheck
 @user_admin
-def save(update, context):
+def tag(update, context):
 	chat = update.effective_chat  # type: Optional[Chat]
 	user = update.effective_user  # type: Optional[User]
 	conn = connected(context.bot, update, chat, user.id)
