@@ -118,11 +118,11 @@ def get(bot, update, notename, show_none=True, no_format=False):
 						if is_delete:
 						if is_private:
 							bot.send_message(user.id, text,
-										 parse_mode=parseMode, disable_web_page_preview=True,
+										 parse_mode=parseMode, disable_web_page_preview=False,
 										 reply_markup=keyboard)
 						else:
 							bot.send_message(send_id, text, reply_to_message_id=reply_id,
-										 parse_mode=parseMode, disable_web_page_preview=True,
+										 parse_mode=parseMode, disable_web_page_preview=False,
 										 reply_markup=keyboard)
 					except BadRequest as excp:
 						if excp.message == "Wrong http url":
@@ -145,9 +145,9 @@ def get(bot, update, notename, show_none=True, no_format=False):
 						if is_delete:
 							update.effective_message.delete()
 						if is_private:
-							ENUM_FUNC_MAP[note.msgtype](user.id, note.file, caption=text, parse_mode=parseMode, disable_web_page_preview=True, reply_markup=keyboard)
+							ENUM_FUNC_MAP[note.msgtype](user.id, note.file, caption=text, parse_mode=parseMode, disable_web_page_preview=False, reply_markup=keyboard)
 						else:
-							ENUM_FUNC_MAP[note.msgtype](send_id, note.file, caption=text, reply_to_message_id=reply_id, parse_mode=parseMode, disable_web_page_preview=True, reply_markup=keyboard)
+							ENUM_FUNC_MAP[note.msgtype](send_id, note.file, caption=text, reply_to_message_id=reply_id, parse_mode=parseMode, disable_web_page_preview=False, reply_markup=keyboard)
 					except BadRequest as excp:
 						if excp.message == "Message can't be deleted":
 							pass
