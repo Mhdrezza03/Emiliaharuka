@@ -73,7 +73,7 @@
     "API_OPENWEATHER": {
     "description": "Fill With Open Weather API",
     "value": ""
-    }
+    },
     "API_KEY": {
     "description": "Fill Your API Key",
     "value": ""
