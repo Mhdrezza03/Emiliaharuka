@@ -4,8 +4,8 @@ __lang__ = "🇮🇩 Indonesia"
 id = {
 # main stuff
 	"start_text": """
-Hai {}, nama saya {}! Saya seorang manajer grup yang dikelola oleh [master saya ini](tg://user?id={}).
-Untuk mendapatkan info status dan update bot ini, anda dapat bergabung dengan channel kami [Ayra's Bot News](https://t.me/AyraBotNews)
+Hai {}, nama saya {}! Saya seorang manajer grup yang bermanfaat dan dikelola oleh [Yasir Aris M](tg://user?id={}).
+Untuk mendapatkan info status dan update bot ini, anda dapat bergabung dengan channel kami [Ayra's Bot News](https://t.me/AyraBotNews) atau [YasirPedia Channel](https://t.me/YasirPediaChannel)
 
 Ada masalah atau butuh bantuan lebih?
 Gabung grup [Emilia Official Support](https://t.me/EmiliaOfficial)!
@@ -30,7 +30,7 @@ hal-hal yang bisa saya bantu.
    - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu.
 
 
-All commands can either be used with / or !.
+Semua perintah bisa menggunakan / atau !.
 
 Dan berikut ini:
 """,
