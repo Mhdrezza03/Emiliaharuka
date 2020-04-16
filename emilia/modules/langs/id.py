@@ -155,7 +155,7 @@ Catatan:
 
 *Notes*
 -> `/get`
--> `/notes` | `/saved`
+-> `/notes` | `/saved`  | `/tags
 
 *Peraturan*
 -> `/rules`
@@ -205,9 +205,9 @@ Catatan:
 
 *Notes*
 -> `/get`
--> `/save`
+-> `/tag`
 -> `/clear`
--> `/notes` | `/saved`
+-> `/notes` | `/saved` | `/tags`
 
 *Penguncian*
 -> `/lock`
