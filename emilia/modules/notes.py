@@ -116,7 +116,6 @@ def get(bot, update, notename, show_none=True, no_format=False):
 				if note.msgtype in (sql.Types.BUTTON_TEXT, sql.Types.TEXT):
 					try:
 						if is_delete:
-							update.effective_message.delete()
 						if is_private:
 							bot.send_message(user.id, text,
 										 parse_mode=parseMode, disable_web_page_preview=True,
@@ -174,7 +173,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
 					LOGGER.warning("Pesan itu: %s", str(note.value))
 		return
 	elif show_none:
-		send_message(update.effective_message, tl(update.effective_message, "Catatan ini tidak ada"))
+		send_message(update.effective_message, tl(update.effective_message, "Catatan ini tidak ada dihatiku"))
 
 
 @run_async
@@ -186,7 +185,7 @@ def cmd_get(update, context):
 	elif len(args) >= 1:
 		get(context.bot, update, args[0], show_none=True)
 	else:
-		send_message(update.effective_message, tl(update.effective_message, "Get apa?"))
+		send_message(update.effective_message, tl(update.effective_message, "Ha? Aq ga paham maksud kamu"))
 
 
 @run_async
@@ -231,7 +230,7 @@ def save(update, context):
 	note_name, text, data_type, content, buttons = get_note_type(msg)
 
 	if data_type is None:
-		send_message(update.effective_message, tl(update.effective_message, "Tidak ada catatan!"))
+		send_message(update.effective_message, tl(update.effective_message, "Tidak ada catatan dihatiku!"))
 		return
 
 	if len(text.strip()) == 0:
@@ -239,16 +238,16 @@ def save(update, context):
 		
 	sql.add_note_to_db(chat_id, note_name, text, data_type, buttons=buttons, file=content)
 	if conn:
-		savedtext = tl(update.effective_message, "Ok, catatan `{note_name}` disimpan di *{chat_name}*.").format(note_name=note_name, chat_name=chat_name)
+		savedtext = tl(update.effective_message, "Ok, Tag `{note_name}` disimpan di *{chat_name}*.").format(note_name=note_name, chat_name=chat_name)
 	else:
-		savedtext = tl(update.effective_message, "Ok, catatan `{note_name}` disimpan.").format(note_name=note_name)
+		savedtext = tl(update.effective_message, "Ok, Tag `{note_name}` disimpan.").format(note_name=note_name)
 	try:
 		send_message(update.effective_message, savedtext, parse_mode=ParseMode.MARKDOWN)
 	except BadRequest:
 		if conn:
-			savedtext = tl(update.effective_message, "Ok, catatan <code>{note_name}</code> disimpan di <b>{chat_name}</b>.").format(note_name=note_name, chat_name=chat_name)
+			savedtext = tl(update.effective_message, "Ok, Tag <code>{note_name}</code> disimpan di <b>{chat_name}</b>.").format(note_name=note_name, chat_name=chat_name)
 		else:
-			savedtext = tl(update.effective_message, "Ok, catatan <code>{note_name}</code> disimpan.").format(note_name=note_name)
+			savedtext = tl(update.effective_message, "Ok, Tag <code>{note_name}</code> disimpan.").format(note_name=note_name)
 		send_message(update.effective_message, savedtext, parse_mode=ParseMode.HTML)
 
 	#if msg.reply_to_message and msg.reply_to_message.from_user.is_bot:
@@ -294,42 +293,42 @@ def clear(update, context):
 				catatangagal.append(notename)
 		if len(catatan) >= 1 and len(catatangagal) == 0:
 			if conn:
-				rtext = tl(update.effective_message, "Catatan di *{chat_name}* untuk `{note_name}` dihapus 😁").format(chat_name=chat_name, note_name=", ".join(catatan))
+				rtext = tl(update.effective_message, "Tag di *{chat_name}* untuk `{note_name}` dihapus 😁").format(chat_name=chat_name, note_name=", ".join(catatan))
 			else:
-				rtext = tl(update.effective_message, "Catatan `{note_name}` dihapus 😁").format(note_name=", ".join(catatan))
+				rtext = tl(update.effective_message, "Tag `{note_name}` dihapus 😁").format(note_name=", ".join(catatan))
 			try:
 				send_message(update.effective_message, rtext, parse_mode=ParseMode.MARKDOWN)
 			except BadRequest:
 				if conn:
-					rtext = tl(update.effective_message, "Catatan di <b>{chat_name}</b> untuk <code>{note_name}</code> dihapus 😁").format(chat_name=chat_name, note_name=", ".join(catatan))
+					rtext = tl(update.effective_message, "Tag di <b>{chat_name}</b> untuk <code>{note_name}</code> dihapus 😁").format(chat_name=chat_name, note_name=", ".join(catatan))
 				else:
-					rtext = tl(update.effective_message, "Catatan <code>{note_name}</code> dihapus 😁").format(note_name=", ".join(catatan))
+					rtext = tl(update.effective_message, "Tag <code>{note_name}</code> dihapus 😁").format(note_name=", ".join(catatan))
 				send_message(update.effective_message, rtext, parse_mode=ParseMode.HTML)
 		elif len(catatangagal) >= 0 and len(catatan) == 0:
 			if conn:
-				rtext = tl(update.effective_message, "Catatan di *{chat_name}* untuk `{fnote_name}` gagal dihapus!").format(chat_name=chat_name, fnote_name=", ".join(catatangagal))
+				rtext = tl(update.effective_message, "Tag di *{chat_name}* untuk `{fnote_name}` gagal dihapus!").format(chat_name=chat_name, fnote_name=", ".join(catatangagal))
 			else:
-				rtext = tl(update.effective_message, "Catatan `{fnote_name}` gagal dihapus!").format(fnote_name=", ".join(catatangagal))
+				rtext = tl(update.effective_message, "Tag `{fnote_name}` gagal dihapus!").format(fnote_name=", ".join(catatangagal))
 			try:
 				send_message(update.effective_message, rtext, parse_mode=ParseMode.MARKDOWN)
 			except BadRequest:
 				if conn:
-					rtext = tl(update.effective_message, "Catatan di <b>{chat_name}</b> untuk <code>{fnote_name}</code> gagal dihapus!").format(chat_name=chat_name, fnote_name=", ".join(catatangagal))
+					rtext = tl(update.effective_message, "Tag di <b>{chat_name}</b> untuk <code>{fnote_name}</code> gagal dihapus!").format(chat_name=chat_name, fnote_name=", ".join(catatangagal))
 				else:
-					rtext = tl(update.effective_message, "Catatan <code>{fnote_name}</code> gagal dihapus!").format(fnote_name=", ".join(catatangagal))
+					rtext = tl(update.effective_message, "Tag <code>{fnote_name}</code> gagal dihapus!").format(fnote_name=", ".join(catatangagal))
 				send_message(update.effective_message, tl(update.effective_message, rtext), parse_mode=ParseMode.HTML)
 		else:
 			if conn:
-				rtext = tl(update.effective_message, "Catatan di *{chat_name}* untuk `{note_name}` dihapus 😁\nCatatan `{fnote_name}` gagal dihapus!").format(chat_name=chat_name, note_name=", ".join(catatan), fnote_name=", ".join(catatangagal))
+				rtext = tl(update.effective_message, "Tag di *{chat_name}* untuk `{note_name}` dihapus 😁\nTag `{fnote_name}` gagal dihapus!").format(chat_name=chat_name, note_name=", ".join(catatan), fnote_name=", ".join(catatangagal))
 			else:
-				rtext = tl(update.effective_message, "Catatan `{note_name}` dihapus 😁\nCatatan `{fnote_name}` gagal dihapus!").format(note_name=", ".join(catatan), fnote_name=", ".join(catatangagal))
+				rtext = tl(update.effective_message, "Tag `{note_name}` dihapus 😁\nTag `{fnote_name}` gagal dihapus!").format(note_name=", ".join(catatan), fnote_name=", ".join(catatangagal))
 			try:
 				send_message(update.effective_message, rtext, parse_mode=ParseMode.MARKDOWN)
 			except BadRequest:
 				if conn:
-					rtext = tl(update.effective_message, "Catatan di <b>{chat_name}</b> untuk <code>{note_name}</code> dihapus 😁\nCatatan <code>{fnote_name}</code> gagal dihapus!").format(chat_name=chat_name, note_name=", ".join(catatan), fnote_name=", ".join(catatangagal))
+					rtext = tl(update.effective_message, "Tag di <b>{chat_name}</b> untuk <code>{note_name}</code> dihapus 😁\nCatatan <code>{fnote_name}</code> gagal dihapus!").format(chat_name=chat_name, note_name=", ".join(catatan), fnote_name=", ".join(catatangagal))
 				else:
-					rtext = tl(update.effective_message, "Catatan <code>{note_name}</code> dihapus 😁\nCatatan <code>{fnote_name}</code> gagal dihapus!").format(note_name=", ".join(catatan), fnote_name=", ".join(catatangagal))
+					rtext = tl(update.effective_message, "Tag <code>{note_name}</code> dihapus 😁\nCatatan <code>{fnote_name}</code> gagal dihapus!").format(note_name=", ".join(catatan), fnote_name=", ".join(catatangagal))
 				send_message(update.effective_message, tl(update.effective_message, rtext), parse_mode=ParseMode.HTML)
 
 	else:
@@ -390,10 +389,10 @@ def list_notes(update, context):
 		chat_id = update.effective_chat.id
 		if chat.type == "private":
 			chat_name = ""
-			msg = tl(update.effective_message, "*Catatan lokal:*\n")
+			msg = tl(update.effective_message, "*Daftar Tag lokal:*\n")
 		else:
 			chat_name = chat.title
-			msg = tl(update.effective_message, "*Catatan di {}:*\n").format(chat_name)
+			msg = tl(update.effective_message, "*Daftar Tag di {}:*\n").format(chat_name)
 
 	note_list = sql.get_all_chat_notes(chat_id)
 
@@ -417,7 +416,7 @@ def list_notes(update, context):
 		except BadRequest:
 			if chat.type == "private":
 				chat_name = ""
-				msg = tl(update.effective_message, "<b>Catatan lokal:</b>\n")
+				msg = tl(update.effective_message, "<b>Daftar Tag lokal:</b>\n")
 			else:
 				chat_name = chat.title
 				msg = tl(update.effective_message, "<b>Daftar Tag di {}:</b>\n").format(chat_name)
@@ -427,7 +426,7 @@ def list_notes(update, context):
 					send_message(update.effective_message, msg, parse_mode=ParseMode.MARKDOWN)
 					msg = ""
 				msg += note_name
-			msg += tl(update.effective_message, "\nAnda dapat mengambil catatan ini dengan menggunakan <code>/get notename</code>, atau <code>#notename</code>")
+			msg += tl(update.effective_message, "\nAnda dapat mengambil tag ini dengan menggunakan <code>/get notename</code>, atau <code>#notename</code>")
 			send_message(update.effective_message, msg, parse_mode=ParseMode.HTML)
 
 
@@ -534,12 +533,12 @@ __mod_name__ = "Notes"
 GET_HANDLER = CommandHandler("get", cmd_get, pass_args=True)
 HASH_GET_HANDLER = MessageHandler(Filters.regex(r"^#[^\s]+"), hash_get)
 
-SAVE_HANDLER = CommandHandler("save", save)
+SAVE_HANDLER = CommandHandler("tag", tag)
 DELETE_HANDLER = CommandHandler("clear", clear, pass_args=True)
 
 PMNOTE_HANDLER = CommandHandler("privatenote", private_note, pass_args=True)
 
-LIST_HANDLER = DisableAbleCommandHandler(["notes", "saved"], list_notes, admin_ok=True)
+LIST_HANDLER = DisableAbleCommandHandler(["notes", "saved", "tags"], list_notes, admin_ok=True)
 
 dispatcher.add_handler(GET_HANDLER)
 dispatcher.add_handler(SAVE_HANDLER)
