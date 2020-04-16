@@ -81,6 +81,10 @@
     "NO_LOAD": {
     "description": "Disabled Module",
     "value": "rss, sed"
+    },
+    "TEMPORARY_DATA": {
+    "description": "Temporary data for backup module, use int number",
+    "value": ""
     }
   },
   "addons": [
