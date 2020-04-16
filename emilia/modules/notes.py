@@ -385,7 +385,7 @@ def list_notes(update, context):
 	if conn:
 		chat_id = conn
 		chat_name = dispatcher.bot.getChat(conn).title
-		msg = tl(update.effective_message, "*Catatan di {}:*\n").format(chat_name)
+		msg = tl(update.effective_message, "*Daftar Tag di {}:*\n").format(chat_name)
 	else:
 		chat_id = update.effective_chat.id
 		if chat.type == "private":
@@ -404,11 +404,11 @@ def list_notes(update, context):
 			msg = ""
 		msg += note_name
 
-	if msg == tl(update.effective_message, "*Catatan di {}:*\n").format(chat_name) or msg == tl(update.effective_message, "*Catatan lokal:*\n"):
+	if msg == tl(update.effective_message, "*Daftar Tag di {}:*\n").format(chat_name) or msg == tl(update.effective_message, "*Catatan lokal:*\n"):
 		if conn:
-			send_message(update.effective_message, tl(update.effective_message, "Tidak ada catatan di obrolan *{}*!").format(chat_name), parse_mode="markdown")
+			send_message(update.effective_message, tl(update.effective_message, "Tidak ada catatan di hatiku *{}*!").format(chat_name), parse_mode="markdown")
 		else:
-			send_message(update.effective_message, tl(update.effective_message, "Tidak ada catatan di obrolan ini!"))
+			send_message(update.effective_message, tl(update.effective_message, "Tidak ada catatan di hatiku!"))
 
 	elif len(msg) != 0:
 		msg += tl(update.effective_message, "\nAnda dapat mengambil catatan ini dengan menggunakan `/get notename`, atau `#notename`")
@@ -420,7 +420,7 @@ def list_notes(update, context):
 				msg = tl(update.effective_message, "<b>Catatan lokal:</b>\n")
 			else:
 				chat_name = chat.title
-				msg = tl(update.effective_message, "<b>Catatan di {}:</b>\n").format(chat_name)
+				msg = tl(update.effective_message, "<b>Daftar Tag di {}:</b>\n").format(chat_name)
 			for note in note_list:
 				note_name = " - <code>{}</code>\n".format(note.name)
 				if len(msg) + len(note_name) > MAX_MESSAGE_LENGTH:
