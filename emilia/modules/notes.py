@@ -116,6 +116,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
 				if note.msgtype in (sql.Types.BUTTON_TEXT, sql.Types.TEXT):
 					try:
 						if is_delete:
+							update.effective_message.delete()
 						if is_private:
 							bot.send_message(user.id, text,
 										 parse_mode=parseMode, disable_web_page_preview=False,
