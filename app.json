@@ -77,6 +77,10 @@
     "API_KEY": {
     "description": "Fill Your API Key",
     "value": ""
+    },
+    "NO_LOAD": {
+    "description": "Disabled Module",
+    "value": "['rss', 'sed']"
     }
   },
   "addons": [
