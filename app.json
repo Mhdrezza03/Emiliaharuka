@@ -80,7 +80,7 @@
     },
     "NO_LOAD": {
     "description": "Disabled Module",
-    "value": "['rss', 'sed']"
+    "value": "rss, sed"
     }
   },
   "addons": [
